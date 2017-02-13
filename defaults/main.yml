@@ -1,0 +1,5 @@
+---
+influxdb_version: 1.2.0
+influxdb_platform: amd64
+influxdb_package_file: influxdb_{{ influxdb_version }}_{{ influxdb_platform }}.deb
+influxdb_package_url: "https://dl.influxdata.com/telegraf/releases/{{ influxdb_package_file }}"
