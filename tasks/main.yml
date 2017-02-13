@@ -27,7 +27,7 @@
 
 - name: Place Config
   template:
-    dest: /etc/opt/influxdb/influxdb.conf
+    dest: /etc/influxdb/influxdb.conf
     src: influxdb.conf.j2
   notify: restart influxdb
 
