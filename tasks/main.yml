@@ -26,8 +26,9 @@
     state: present
 
 - name: Place Config
+  template:
+    dest: /etc/opt/influxdb/influxdb.conf
     src: influxdb.conf.j2
-    dest: dest=/etc/opt/influxdb/influxdb.conf
   notify: restart influxdb
 
 #- name: Create database
