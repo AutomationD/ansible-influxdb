@@ -1,6 +1,6 @@
 galaxy_info:
   author: Dmitry Kireev
-  description: Ansible InfluxDB Role
+  description: InfluxDB Ansible Role
   license: MIT
 
   min_ansible_version: 2.0

@@ -1,14 +1,9 @@
 ---
-#- name: Download the tarball
-#  get_url:
-#    url: "{{ influxdb_package_url }}"
-#    dest: "/tmp"
-#    timeout: 30
-#
-#- name: Install Package
-#  package:
-#    name: "{{ influxdb_package_file }}
-#  notify: restart influxdb
+- name: Install Prerequisite Packages
+  package:
+    name: "{{ item }}"
+  with_items:
+    - apt-transport-https
 
 - name: Import InfluxDB GPG signing key
   apt_key:
@@ -17,12 +12,12 @@
 
 - name: Add InfluxDB repository
   apt_repository:
-    repo: deb https://repos.influxdata.com/ubuntu trusty stable
+    repo: "deb https://repos.influxdata.com/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} {{ influxdb_repository_channel }}"
     state: present
 
 - name: Install InfluxDB packages
-  apt:
-    name: influxdb
+  package:
+    name: "influxdb={{ influxdb_version }}"
     state: present
 
 - name: Place Config
@@ -30,9 +25,3 @@
     dest: /etc/influxdb/influxdb.conf
     src: influxdb.conf.j2
   notify: restart influxdb
-
-#- name: Create database
-#    influxdb_database:
-#      hostname: "{{influxdb_ip_address}}"
-#      database_name: "{{influxdb_database_name}}"
-#      state: present
