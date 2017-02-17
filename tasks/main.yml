@@ -25,3 +25,9 @@
     dest: /etc/influxdb/influxdb.conf
     src: influxdb.conf.j2
   notify: restart influxdb
+
+- name: Ensure Service is Running
+  service:
+    name: influxdb
+    state: started
+    enabled: yes
